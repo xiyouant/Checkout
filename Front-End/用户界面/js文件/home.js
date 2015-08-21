@@ -81,13 +81,14 @@ window.onload=function(){
 	var bsend=false;
 	var timer=null;
 	var otmp='';
-	var i=0;
+	var i=0; 
+    var osign=get.byId('warp_sign');
 	//禁止表单提交
 	EventUtil.addHandler(get.byTagName("form", omessage)[0], "submit", function () {return false});
      //为广播按钮绑定发送事件
 	EventUtil.addHandler(osentbut, "click", fnSend);
 	
-	
+	EventUtil.addHandler(get.byClass('register')[0],'click',function () {osign.style.display='block';});
 	//发送广播函数
 	function fnSend ()
 	{

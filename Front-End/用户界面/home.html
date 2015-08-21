@@ -5,12 +5,13 @@
 <title>西安邮电大学网络科技协会协会成员签到系统</title><!---->
 <link type="text/css" rel="stylesheet" href="css文件/home.css" /><!--链接到外部的home.css文件-->
 <script src='js文件/home.js'></script><!--链接到外部的home.js文件-->
+<link type="text/css" rel="stylesheet" href="css文件/cover.css" />
 </head>
 
 <body>
 <div id='warp'>
     <div id='header'><!--前面的导航之类的东西-->
-          <img src="img/协会LOGO.png" />
+          <img src="img/LOGO-圆2.png" />
           <span>xiyouant</span><!--协会标志结束-->
           <ul>
               <li class='register'><a href="#">签到</a></li>
@@ -18,7 +19,6 @@
     </div><!--header结束-->
     
     <div id='check'>
-        <div>签到统计</div>
         <ul>
             <li class=''>周一</li>
             <li class=''>周二</li>
@@ -36,8 +36,9 @@
                <div>请注意这里的公告</div>         
            </div><!--这部分是公告-->
            <div id='message'><!--后面是留言板部分-->
+                    <span id='say'>留言板</span>
+                    <div class='line_a'></div>
                     <div class='list'><!--呈现大家留言的地方-->
-                        <h3><span>大家在说</span></h3>
                         <ul>
                              <li class="">
                                     <div class="content">
@@ -55,5 +56,19 @@
            </div><!--这部分是留言板-->
     </div>
 </div><!--warp结束-->
+<div id='warp_sign'>
+   <div id='sign'>
+       <div id='sign_top'>
+           <ul>
+             <li class='line_b'>Login form</li>
+           </ul>
+       </div>
+       <div id='sign_bottom'>
+           <div><textarea id='username' placeholder="Username"></textarea></div>
+           <div><textarea id='password' placeholder="Password"></textarea></div>
+           <input id='sign_btn' type="button" value="Sign in" />
+       </div>
+   </div>
+</div>
 </body>
 </html>
