@@ -8,16 +8,16 @@ li{list-style-type:none;}
 
 
 /*	这个是对body设置*/
-body{background-size:100% 100%;background-image:url(file:///C|/Users/Administrator/Desktop/%E6%88%90%E5%93%81/%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2/img/5585b94fd494e.jpg);}
+body{background-size:100% 100%;background-color:#8C9636;}
 	
 /*header部分的css*/
-#header{height:60px;width:100%;opacity:0.8;background-color:black;}
+#header{height:60px;width:100%;background-color:black;opacity:0.6;}
 #header span{float:left;color:white;margin:10px 20px;font-weight:bold;line-height:40px;letter-spacing:10px;}
 #header img{height:60px;width:60px;float:left;margin-left:20px;}
 #header ul{float:right;padding:0;margin-right:30px;}
-#header ul li{float:left;list-style-type:none;height:40px;width:80px;text-align:center;line-height:40px;color:white;font-weight:bold;letter-spacing:5px;border-radius:10px;margin-top:-10px;margin-right:10px;}
-#header ul li a{color:white;}
-#header ul li.register{margin-right:50px;background-color:#E52113;}
+#header ul li{float:left;list-style-type:none;height:40px;width:80px;text-align:center;line-height:40px;font-weight:bold;letter-spacing:5px;border-radius:10px;margin-top:-10px;margin-right:10px;}
+#header ul li a{color:#f0f0f0;}
+#header ul li.register{margin-right:50px;background-color:#ACC337;}
 
 
 
@@ -25,8 +25,8 @@ body{background-size:100% 100%;background-image:url(file:///C|/Users/Administrat
 /*每周的考勤css*/
 #check{position:absolute;right:0;top:60px;}	
 #check ul{padding:0}
-#check div{background-color:#ACC337;height:30px;width:65px;border-radius:10px;opacity:0.8;font-size:14px;text-align:center;line-height:30px;color:#fff
-;}
+#check div{height:30px;width:65px;border-radius:10px;opacity:0.8;font-size:14px;text-align:center;line-height:30px;color:black
+;border-bottom:1px solid #ccc;border-top:1px solid #ccc;}
 #check ul li{width:65px;height:65px;list-style-type:none;background-color:#ACC337;text-decoration:none;border-radius:10px;margin-top:8px;text-align:center;line-height:65px;opacity:0.8;color:#fff;}
 
 
@@ -37,13 +37,14 @@ body{background-size:100% 100%;background-image:url(file:///C|/Users/Administrat
 
 /*obody部分的css*/
 #obody{width:550px;margin:0 auto;}
-#announce{width:520px;height:100px;border-radius:10px;margin-top:10px;opacity:0.8;padding:20px;letter-spacing:10px;color:white;background:#ACC337;}
+#announce{width:520px;height:100px;margin-top:10px;opacity:0.8;padding:20px;letter-spacing:10px;color:white;background:#ACC337;
+border;}
 .line_a{background-color:#fff;height:1px;width:200px;margin:10px 0;}
-#message{height:390px;width:520px;margin-top:10px;background-color:#f0f0f0;padding:20px;border-radius:10px;padding-top:0px;}
-.list{height:360px;width:530px;border-radius:10px;font-size:18px;overflow-y:auto;}
-.list h3{width:480px;color:#666;letter-spacing:5px;background-color:#0CF;border-radius:10px;}
-.list h3 span{margin-left:10px;}
-.list ul{padding:0;margin-top:-15px;}
+#message{height:410px;width:520px;margin-top:0px;background-color:#f0f0f0;padding:20px;padding-top:0px;}
+.list{height:340px;width:530px;border-radius:10px;font-size:18px;overflow-y:auto;}
+#say{color:#ccc;color:#666;letter-spacing:5px;border-radius:10px;display:block;}
+#message div.line_a{background-color:#ccc;margin-top:5px;}
+.list ul{padding:0;margin-top:0px;}
 .list ul li{height:50px;width:480px;border-bottom:1px dashed #ccc;}
 .content div.username{color:black;letter-spacing:5px;display:inline;margin-top:5px;}
 .content div.username a{color:black;}
