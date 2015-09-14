@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+html,body{height:100%;width:100%;margin:0;padding:0;}
+#cover{position:absolute;height:100%;width:100%;min-width:1000px;min-height:600px;display:none;z-index:2;top:0;left:0;}
+#cover_img{height:100%;width:100%;position:fixed;top:0;left:0;z-index:2;}
+#cover_header{height:300px;width:900px;position:relative;z-index:3;top:150px;left:50%;margin-left:-450px;}
+#cover_header span{color:white;width:900px;text-align:center;font-size:130px;display:block;letter-spacing:20px;font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;opacity:0.8;}
+#cover_line_a{width:655px;height:2px;background-color:#f0f0f0;margin-left:122.5px;margin-top:20px;opacity:0.5;}
+#cover_header_img{position:absolute;top:70px;left:352px;height:75px;width:75px;}
+#cover_main{width:500px;height:400px;z-index:3;top:150px;left:50%;margin-left:-250px;position:relative;}
+#username{width:335px;height:40px;line-height:40px;margin-left:82.5px;box-shadow:inset 0 0 8px 0.1px black;resize:none;overflow:auto;background-color:#526283;color:white;border-radius:5px;font-size:18px;background:transparent;border-style:none;outline:none;font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;padding-left:10px;}
+#password{width:335px;height:40px;line-height:40px;margin-left:82.5px;box-shadow:inset 0 0 8px 0.1px black;resize:none;overflow:auto;background-color:#526283;color:white;border-radius:5px;font-size:18px;background:transparent;border-style:none;outline:none;margin-top:50px;font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;padding-left:10px;}
+#cover_sign{border-style:none;width:150px;height:40px;margin-left:82.5px;box-shadow:0px 0px 10px #aaaaaa;background-color:#EC4910;margin-top:50px;color:white;text-align:center;line-height:40px;border-radius:5px;font-family:'微软雅黑', Palatino, serif;resize:none;outline:none;}
+#cover_out{border-style:none;width:150px;height:40px;margin-left:45px;box-shadow:0px 0px 10px #aaaaaa;background-color:#EC4910;margin-top:50px;color:white;text-align:center;line-height:40px;border-radius:5px;font-family:'微软雅黑', Palatino, serif;resize:none;outline:none;}
