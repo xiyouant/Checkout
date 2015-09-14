@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#css_table {
+      display:table;
+	  margin-left:200px;
+	  overflow-y:auto;
+	  
+  }
+.css_tr {
+      display: table-row;
+  }
+.css_td {
+      display: table-cell;
+	  width:157px;
+	  border-right:1px dashed #458177;
+	  border-bottom:1px dashed #458177;
+	  text-align:center;
+	  height:50px;
+	  line-height:50px;
+  }
+
