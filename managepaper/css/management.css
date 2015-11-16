@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 html,body{padding:0;margin:0;width:100%;height:100%;}
-body{min-width:1000px;min-height:600px;}
+body{min-width:1000px;min-height:600px;background-color:#F1F1F1;}
 li{list-style-type:none;}
 a{text-decoration:none;}
 
@@ -10,13 +10,16 @@ a{text-decoration:none;}
 /*header*/
 #header{width:90px;height:100%;background-color:#1F2727;position:fixed;left:0;top:0;}
 #header img{height:90px;width:90px;}
-#header ul{padding:0;margin-top:50px;}
-#header ul li{width:90px;height:70px;line-height:70px;text-align:center;font-weight:bold;margin-bottom:50px;font-size:14px;
+#header ul{padding:0;margin-top:200px;}
+#header ul li{width:90px;height:70px;line-height:70px;text-align:center;font-weight:bold;margin-bottom:200px;font-size:14px;
 cursor:pointer;}
 #header ul li a{color:white;width:90px;height:70px;display:block;}
 
 /*sort*/
 #sort{height:100%;width:100%;overflow:auto;}
+#jump_week{margin-left:185px;margin-top:15px;margin-bottom:10px;}
+#jump_week span{margin:0 10px;font-size: 15px;}
+.jump_week_text{width:15px;}
 
 
 /*announce*/
@@ -25,17 +28,9 @@ cursor:pointer;}
 .line_a{width:500px;height:1px;background-color:#ccc;margin-top:30px;margin-left:200px;}
 #show{margin-left:200px;margin-top:50px;display:block;}
 #title{width:50%;height:40px;margin-left:200px;margin-top:50px;border-radius:5px;line-height:40px;resize:none;overflow:auto;font-size:20px;letter-spacing:5px;outline:none;}
-#conbox{width:80%;height:200px;;margin-left:200px;margin-top:150px;resize:none;overflow:auto;border-radius:5px;line-height:30px;font-size:20px;letter-spacing:5px;outline:none;}
-#announce input{margin-left:85%;height:60px;width:140px;margin-top:20px;border-radius:3px;background-color:#f0f0f0;color:#666;border:none;
-letter-spacing:10px;font-weight:bold;outline:none;font-size:18px;}
-
-
-/*management*/
-#management{height:100%;width:100%;}
-#management h2{margin-left:200px;}
-#del_peo,#add_peo{margin-left:200px;margin-top:50px;width:50%;height:40px;border-radius:5px;line-height:40px;resize:none;overflow:auto;font-size:20px;letter-spacing:5px;outline:none;}
-#del_btn,#add_btn{margin-left:55%;height:60px;width:140px;margin-top:20px;border-radius:3px;background-color:#f0f0f0;color:#666;border:none;
-letter-spacing:10px;font-weight:bold;outline:none;font-size:18px;}
+#conbox{width:80%;height:200px;;margin-left:200px;margin-top:150px;resize:none;overflow:auto;border-radius:5px;line-height:30px;font-size:20px;letter-spacing:2px;outline:none;}
+#announce input{margin-left:83.5%;height:60px;width:140px;margin-top:20px;border-radius:3px;background-color:#f0f0f0;color:#666;border:none;
+letter-spacing:5px;font-weight:bold;outline:none;font-size:18px;}
 
 
 

@@ -1,10 +1,8 @@
 <?php
-   @mysql_connect("localhost","root",'') or die("mysql连接失败");
-   mysql_select_db("qiandao") or die("db连接失败");
-   mysql_set_charset("UTF-8");
+   include("conn.php");
    mysql_query('set names utf8');
    
-   $sql = "SELECT * FROM `notice`; ";
+   $sql = "SELECT `content` FROM `sign_notices` order by `id` DESC limit 1; ";
    
    $query=mysql_query($sql);
  
