@@ -1,9 +1,10 @@
 <?php
 
-   include("conn.php");
+   include("../userpaper/conn.php");
    mysql_query('set names utf8');
    
    $omyi=$_POST['omyi'];
+
 
    $omyn=$_POST['week_num'];
 
@@ -15,11 +16,13 @@
 	 $name= $b['username'];
 	 //echo $name;
 	 if($omyn==1){
-			$fwtime=$i*24*3600+$firsttime;
+			$fwtime=($i+1)*24*3600+$firsttime;
 			$a=date("Y-m-d",$fwtime);
-			$sql="SELECT `checkout_date`  FROM `sign` WHERE `checkout_date` > '$firsttime' and `checkout_date` <= '$a' and `username`='$name';";
+			//echo $a;
+			$sql="SELECT `checkout_date`  FROM `sign` WHERE `checkout_date` > '$firsttime' and `checkout_date` < '$a' and `username`='$name';";
 			 include_once("situation.php");//传给前台一数组
 	}else{
+	//echo 1;
 			$ob=$firsttime+(($omyn-1)*7+$i)*3600*24;
 			//echo (date("Y-m-d",$ob));
 						if($ob>time()){
@@ -42,14 +45,16 @@
 				 $a=date("Y-m-d",$ipotime);
 				 $ipttime=$ipotime-7*24*3600;
 				 $b=date("Y-m-d",$ipttime);
-				 $sql="SELECT `checkout_date`  FROM `sign` WHERE `checkout_date` > '$b' and `checkout_date` <= '$a' and `username`='$name';";
+				 $sql="SELECT `checkout_date`  FROM `sign` WHERE `checkout_date` > '$b' and `checkout_date` < '$a' and `username`='$name';";
 				  include_once("situation.php");  //当n周全满时
 	   }else{
-				 $ipotime=(($omyn-2)*7+$w+$i)*24*3600+$firsttime;
+				 $ipotime=(($omyn-2)*7+$w+$i+1)*24*3600+$firsttime;
 				  $a=date("Y-m-d",$ipotime);
+				  //echo $a;
 				 $ipttime=$ipotime-$w*24*3600;
 				 $b=date("Y-m-d",$ipttime);
-				 $sql="SELECT `checkout_date`  FROM `sign` WHERE `checkout_date` > '$b' and `checkout_date` <= '$a' and `username`='$name';";
+				 //echo $b;
+				 $sql="SELECT `checkout_date`  FROM `sign` WHERE `checkout_date` > '$b' and `checkout_date` < '$a' and `username`='$name';";
 				 include_once("situation.php");
 			}//
 				

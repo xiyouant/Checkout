@@ -5,6 +5,7 @@ $sql = "select `checkout_date` FROM `sign` where `id`='1'"; //第一周有几天
 	//print_r ($b);
 	//echo $b[0];
 	$firsttime=strtotime($ob[0]);//记录签到的第一天
+	/*$firsttime=date("D",strtotime($sfirsttime));*/
 	//echo $firsttime;
 	$time= date("D",strtotime($ob[0]));
 	//echo $time;

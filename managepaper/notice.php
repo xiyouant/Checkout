@@ -1,5 +1,5 @@
 <?php
-   include("conn.php");
+   include("../userpaper/conn.php");
    mysql_query('set names utf8');
    
    
