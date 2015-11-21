@@ -13,6 +13,7 @@ checklogin();
 </head>
 
 <body>
+<div id="safe_out">安全退出</div>
 <div id='main'>
    <div class='line_a'></div>
    <div id='announce'>

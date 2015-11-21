@@ -10,6 +10,8 @@ function xssout (val) {
 };
 
 
+
+
 var get = {
 	byId: function(id) {
 		return typeof id === "string" ? document.getElementById(id) : id
@@ -88,6 +90,7 @@ window.onload=function(){
 	var osign=0;
 	var li_num=30;
 	var oreg_day_li=get.byId('reg_day').getElementsByTagName('li');
+	var osafe_out=get.byId('safe_out');
 	$.ajax
 		({
 				type:'POST',
@@ -107,6 +110,27 @@ window.onload=function(){
 	EventUtil.addHandler(osentbut, "click", fnSend);
 	EventUtil.addHandler(osentbut,'mouseover',function () {this.style.backgroundColor='black';this.style.color='white';})
 	EventUtil.addHandler(osentbut,'mouseout',function () {this.style.backgroundColor='#ccc';this.style.color='black';})
+	EventUtil.addHandler(osafe_out,'click',safeout);
+
+    //安全退出
+
+    function safeout(){
+    	$.ajax
+		({
+				type:'POST',
+				url:'logout.php',
+				success:function(data)
+				{
+					window.location.href="../index.php";
+				}
+				
+		  });
+		
+		
+    }
+
+
+
 	//这个是显示一个人签到情况的函数
 	function showqiandao()
 	{
@@ -273,7 +297,7 @@ window.onload=function(){
 						
 						data:{
 						   //这里的onim也是一个问题
-						   con:xssout(oconbox.value) ,
+						   con:oconbox.value,
 						},
 						
 						success:function(){

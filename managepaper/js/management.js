@@ -81,10 +81,20 @@ window.onload=function(){
     EventUtil.addHandler(oann_btn,'mouseover',function(){this.style.backgroundColor='#1F2727';this.style.color='#f0f0f0';});
 	EventUtil.addHandler(oann_btn,'mouseout',function(){this.style.backgroundColor='#f0f0f0';this.style.color='#666';});
 	EventUtil.addHandler(ojump_btn,'click',fjump);
+	EventUtil.addHandler(get.byId('manage_out'),'click',manageout);
 	
 	
-	
-	
+	$.ajax({
+		   
+		type:'POST',
+		url:'lastweek.php',
+		
+		success:function(rss){
+			var now_week = eval('(' + rss + ')');
+			get.byClass('jump_week_text')[0].value=now_week;
+			}
+		 });
+
 	
 	
 
@@ -99,7 +109,18 @@ window.onload=function(){
 			oodd(opeonum);
 			}
 		 });
-
+    //安全退出
+	function manageout(){
+		$.ajax({
+		   
+		type:'POST',
+		url:'logout.php',
+		
+		success:function(rss){
+			window.location.href="../index.php";
+		}
+		 });
+	}
 	
 	
 	

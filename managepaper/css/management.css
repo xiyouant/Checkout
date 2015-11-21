@@ -11,7 +11,7 @@ a{text-decoration:none;}
 #header{width:90px;height:100%;background-color:#1F2727;position:fixed;left:0;top:0;}
 #header img{height:90px;width:90px;}
 #header ul{padding:0;margin-top:200px;}
-#header ul li{width:90px;height:70px;line-height:70px;text-align:center;font-weight:bold;margin-bottom:200px;font-size:14px;
+#header ul li{width:90px;height:70px;line-height:70px;text-align:center;font-weight:bold;margin-bottom:100px;font-size:14px;
 cursor:pointer;}
 #header ul li a{color:white;width:90px;height:70px;display:block;}
 
@@ -20,7 +20,14 @@ cursor:pointer;}
 #jump_week{margin-left:185px;margin-top:15px;margin-bottom:10px;}
 #jump_week span{margin:0 10px;font-size: 15px;}
 .jump_week_text{width:15px;}
-
+#jump_btn{ 
+    line-height: 1.5;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    color: #fff;
+    background-color: #676767;
+    border-color: #676767;
+    cursor: pointer;}
 
 /*announce*/
 #announce{height:100%;width:100%;}

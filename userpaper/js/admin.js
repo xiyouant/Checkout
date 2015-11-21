@@ -1,13 +1,7 @@
 // JavaScript Document
-			
-function xssout (val) {
-    val = val.toString();
-    val = val.replace(/[<]/g, "&lt;");
-    val = val.replace(/[>]/g, "&gt;");
-    val = val.replace(/"/g, "&quot;");
-    val = val.replace(/'/g, "&#39;");
-    return val;
-};
+
+
+
 
 var get = {
 	byId: function(id) {
@@ -69,22 +63,21 @@ function css(obj, attr, value)
 
 
 
-
 window.onload=function(){
-	var ocover_sign=get.byId("cover_sign");
-	EventUtil.addHandler(ocover_sign,'click',fsign);
-	EventUtil.addHandler(get.byId('manage_sign'),'mouseover',function(){this.style.backgroundColor='#0B224C'});
-	EventUtil.addHandler(get.byId('manage_sign'),'mouseout',function(){this.style.backgroundColor='rgba(68,103,157,0.5)'});
-	EventUtil.addHandler(get.byId('manage_sign'),'click',function(){ window.location.href="userpaper/admin.html"});
-	/*登录函数*/
+	var obtn=get.byId("btn");
+	EventUtil.addHandler(obtn,"click",fsign);
+
+
 	function fsign(){
-		var ogetusername=xssout(get.byId('username').value);
-		var ogetpassword=xssout(get.byId('password').value);
+		var ogetusername=get.byId('username').value;
+		var ogetpassword=get.byId('password').value;
 		var oresult;
+		obtn.style.borderBottom='none';
+		get.byId('password').style.marginBottom='14px';
 		$.ajax
 		({
 			type:'POST',
-			url:'userpaper/login.php',
+			url:'adminlogin.php',
 			
 			data:{
 			   use:ogetusername,
@@ -93,7 +86,6 @@ window.onload=function(){
 			
 			success:function(data)
 			{
-				
 			   ofsign(data);
 			  
 	
@@ -103,24 +95,21 @@ window.onload=function(){
 		
 		
 	}
-	
-	
+
+
 	function ofsign(data){
-		       if(data==1)
+		 if(data==1)
 			   {
-				   window.location.href="userpaper/main.php";
+				   window.location.href="../managepaper/management.php";
+	
 			   }
-			   else
+		else
 			   {
 				   alert("您未登录成功，请重新登录");
+				   obtn.style.borderBottom=' solid #299D17 4px';
+		           get.byId('password').style.marginBottom='10px';
 				   get.byId('username').value="";
 				   get.byId('password').value="";
 			   }
 	}
-	
-	
-	
-	
-	
-	
 }

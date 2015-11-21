@@ -19,6 +19,7 @@ checklogin();
 		<ul>
 		   <li><a href='#sort'>统计</a></li>
 		   <li><a href="#announce">公告</a></li>
+		   <li id="manage_out"><a href="#">退出</a></li>
 		</ul>
 	</div><!--首先是左侧面是定位为fixed的导航条-->
 	<div id='sort'>
