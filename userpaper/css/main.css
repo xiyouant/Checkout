@@ -1,13 +1,16 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 a{text-decoration:none;}
 li{list-style-type:none;}
 
 
 
-html,body{width:100%;height:100%;padding:0;margin:0;font-family:'微软雅黑', Geneva, sans-serif}
+html,body{width:100%;height:100%;padding:0;margin:0;font-family:'微软雅黑', Geneva, sans-serif;overflow: hidden;}
 #bcg{width:100%;height:100%;position:absolute;top:-10px;z-index:-1;}
-#main{width:80%;height:90%;box-shadow:0px 0px 100px #aaaaaa;margin:0 auto;margin-top:50px;border:1px solid #ccc;border-radius:5px;position:relative;min-width:1000px;min-height:600px;}
+#main{width:80%;height:90%;box-shadow:0px 0px 100px #aaaaaa;margin:0 auto;margin-top:20px;border:1px solid #ccc;border-radius:5px;position:relative;min-width:1000px;min-height:600px;}
+
+
+#safe_out{font-size: 13px;line-height: 13px; padding: 10px 8px 10px 8px;margin-right: 5px;border-radius: 3px;background-color: #676767;color: #fff;float: right;margin-right:30px;margin-top:10px;cursor: pointer;}
 
 #announce{height:75%;width:45%;float:left;overflow:hidden;border-right:0px solid black;position:relative;}
 #announce img{margin-left:10.3%;margin-top:5px;float:left;height:15%;width:80%;}
@@ -17,15 +20,12 @@ html,body{width:100%;height:100%;padding:0;margin:0;font-family:'微软雅黑', 
 #say{height:75%;width:55%;float:left;background-color:#f0f0f0;position:relative;overflow:hidden;}
 #say img{height:80%;width:12%;float:right;margin-right:10px;margin-top:5px;}
 .say_header{position:absolute;top:93%;width:100%;font-size:18px;word-spacing:10px;height:15%;line-height:15%;text-align:center;}
-#register{height:25%;width:66%;float:left;background-color:#333;position:relative;}
+#register{height:25%;width:100%;float:left;background-color:#333;position:relative;}
 #reg_day{padding:0;margin:0;width:100%;height:40%;top:33.5%;position:absolute;}
-#reg_day li{list-style-type:none;float:left;text-align:center;font-size:18px;background-color:#E3E0D9;height:100%;width:6.6%;margin-left:11.1%;border-radius:30px;display:table;background-color:#ccc;}
+#reg_day li{list-style-type:none;float:left;text-align:center;font-size:18px;background-color:#E3E0D9;height:100%;width:6.6%;margin-left:6.7%;border-radius:30px;display:table;background-color:#ccc;}
 #reg_day li.reg_in{background-color:#A4C344;}
 #reg_day li span{display:table-cell;vertical-align:middle;color:white;}
-#mysay{height:25%;width:34%;float:left;position:relative;background-color:#E3E0D9;position:relative;}
-#mysay_main{width:55%;height:48.2%;background-color:#E3E0D9;border:2px solid #A09C93;position:absolute;top:25.9%;left:22.5%;border-radius:10px;display:table;text-align:center;box-shadow:0px 0px 10px #aaaaaa;}
-#mysay_main span{vertical-align:middle;display:table-cell;letter-spacing:5px;}
-
+.reg_in{background-color:red;}
 
 
 
@@ -43,4 +43,4 @@ html,body{width:100%;height:100%;padding:0;margin:0;font-family:'微软雅黑', 
 .b{width:20%;height:100%;margin-top:10px;}
 #conbox{resize:none;overflow:auto;height:30px;width:100%;line-height:30px;font-size:15px;border-radius:5px;}
 #sentbut{border:0;width:100%;height:35px;cursor:pointer;background-color:#ccc;border-radius:5px;color:black;
-;margin-left:30%;font-family:'微软雅黑';}
+;margin-left:30%;font-family:'微软雅黑', Geneva, sans-serif;;}

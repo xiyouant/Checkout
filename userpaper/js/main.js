@@ -1,9 +1,17 @@
 // JavaScript Document
 
+function xssout (val) {
+    val = val.toString();
+    val = val.replace(/[<]/g, "&lt;");
+    val = val.replace(/[>]/g, "&gt;");
+    val = val.replace(/"/g, "&quot;");
+    val = val.replace(/'/g, "&#39;");
+    return val;
+};
 
-/*--------------------
-     获取id,class,TagName
-----------------------*/
+
+
+
 var get = {
 	byId: function(id) {
 		return typeof id === "string" ? document.getElementById(id) : id
@@ -62,9 +70,10 @@ function css(obj, attr, value)
 	}
 };
 
+
+
 window.onload=function(){
 	var omessage=get.byId('message');
-	var ousername=get.byId('username');
 	var oconbox=get.byId('conbox');
 	var osentbut=get.byId('sentbut');
 	var olist=get.byClass('list')[0];
@@ -75,13 +84,25 @@ window.onload=function(){
 	var timer=null;
 	var otmp='';
 	var i=0; 
-	var ocover=get.byId('cover');
-	var ocover_sign=get.byId('cover_sign');
-	var ocover_out=get.byId('cover_out');
 	var oann_ul=document.getElementById('ann_ul');
 	var oann_li=oann_ul.getElementsByClassName('ann_li');
 	var onim='';
 	var osign=0;
+	var li_num=30;
+	var oreg_day_li=get.byId('reg_day').getElementsByTagName('li');
+	var osafe_out=get.byId('safe_out');
+	$.ajax
+		({
+				type:'POST',
+				url:'sessionuser.php',
+				
+						
+				success:function(data)
+				{
+					onim=data;
+				  
+				}
+		  });
 	
 	//禁止表单提交
 	EventUtil.addHandler(get.byTagName("form", omessage)[0], "submit", function () {return false});
@@ -89,70 +110,148 @@ window.onload=function(){
 	EventUtil.addHandler(osentbut, "click", fnSend);
 	EventUtil.addHandler(osentbut,'mouseover',function () {this.style.backgroundColor='black';this.style.color='white';})
 	EventUtil.addHandler(osentbut,'mouseout',function () {this.style.backgroundColor='#ccc';this.style.color='black';})
-	get.byId('mysay_main').onmouseover=function(){this.style.backgroundColor='#EC4910';this.style.color='white';this.style.border='none';};
-	EventUtil.addHandler(get.byId('mysay_main'),'mouseout',function(){this.style.backgroundColor='#E3E0D9';this.style.color='black';this.style.border='2px solid #A09C93';});
-	
-	
-	get.byId('mysay_main').onclick=function () {ocover.style.display='block';}
-	EventUtil.addHandler(ocover_sign,'click',fsign);
-	EventUtil.addHandler(ocover_out,'click',function () {ocover.style.display='none';});
-	
-	
-	
+	EventUtil.addHandler(osafe_out,'click',safeout);
 
+    //安全退出
+
+    function safeout(){
+    	$.ajax
+		({
+				type:'POST',
+				url:'logout.php',
+				success:function(data)
+				{
+					window.location.href="../index.php";
+				}
+				
+		  });
+		
+		
+    }
+
+
+
+	//这个是显示一个人签到情况的函数
+	function showqiandao()
+	{
+		var mydata=new Date();
+		var weekday=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+		var mynum=mydata.getDay();
+		
+		$.ajax
+		({
+				type:'POST',
+				url:'count.php',
+						
+				success:function(rsc)
+				{
+				    var oous=eval('( ' +rsc+ ' )');
+					ookk(oous);
+				  
+				}
+		  });
+	}
+	//这个是接在showqiandao（）后面的函数
+	function ookk(oous){
+		for( i in oous)
+			  {
+				  if(oous[i]==1)
+				  {
+					  
+					  oreg_day_li[i].className='reg_in';
+				  }
+			  }
+	}
 	
-		$.ajax({
-        type:'GET',
-		url:'noticeout.php',
-        
-		success:function(rsw){
-			var ono = eval('(' + rsw + ')');
-			get.byId('ann_main').innerHTML=ono.neirong;
-        }
+	
+	//显示公告和留言的函数
+	function  showinf()
+	{
+		
+	
+		$.ajax
+		({
+			type:'GET',
+			url:'noticeout.php',
+			success:function(rsw)
+			{
+				 
+				var ono = eval('(' + rsw + ')');
+				
+				var  ono_inner;
+				for( i in ono)
+				{
+					ono_inner=ono[i]
+				}
+				get.byId('ann_main').innerHTML=ono_inner;
+			}
 		
 		 });
 	
-	
-	
-	//我这个是在加载页面的时候上传大家的留言
-	var li_num=30;
-	for(var i=0;i<li_num;i++)
-	{
-		$.ajax({
-        type:'POST',
-		url:'contentsout.php',
-        
-		data:{
-		   oi:i ,
-		},
-        
-		success:function(rs){
-		var Data = eval('(' + rs + ')');
-		var oname=Data.name;
-	
-		var omonth=Data.Month;
+		//上面是上传公告
 		
-		var odate=Data.dat;
-		var ohours=Data.Hours;
-		var ominutes=Data.Minutes;
-		var ocontents=Data.contents;
-        oobb(oname,omonth,odate,ohours,ominutes,ocontents);
-        }
-			   });
+		//我这个是在加载页面的时候上传大家的留言
+	    
+		for(var i=0;i<li_num;i++)
+		{
+			$.ajax
+			({
+					type:'POST',
+					url:'messageout.php',
+					
+					data:{
+					   oi:i ,
+				},
+				
+				success:function(rs)
+				{
+	                var ors=eval('(' + rs + ')');
+					
+					for(var num_i in ors)
+					{
+					    
+						if(num_i=='0')
+						{
+							var oname=ors[num_i].name;
+							var ocontents=ors[num_i].content;
+							
+							
+						}
+						if(num_i=='1')
+						{
+							var omonth=ors[num_i];
+						}
+						if(num_i=='2')
+						{
+							var odate=ors[num_i];
+						}if(num_i=='3')
+						{
+							var ohours=ors[num_i];
+						}
+						if(num_i=='4')
+						{
+							var ominutes=ors[num_i];
+
+						}
+					}
+					oobb(oname,omonth,odate,ohours,ominutes,ocontents);
+				}
+			});
+			
+			
 		
 		
-	
-	
-				 }
+		}
+    }
 				 
 				 
 				 
 	  
 	  
-	  
+	 //这个是接在showinf后面的函数 
 	function oobb(oname,omonth,odate,ohours,ominutes,ocontents){
-		var oall_li = document.createElement("li");//创建一个li节点
-		
+		var oall_li = document.createElement("li");
+		//创建一个li节点
 		//这里面应该从后台提取用户的名字显示上去
 		//这里面的.replace(/<[^>]*>|&nbsp;/ig,'')是把留言框输入的html标签自动屏蔽掉，包括空格
 		oall_li.innerHTML = "<div class=\"content\">\
@@ -165,153 +264,13 @@ window.onload=function(){
 		oann_li.length ? oann_ul.insertBefore(oall_li, oann_li[0]) : oann_ul.appendChild(oall_li);//因为可能没有节点的时候，不存在aLi[0]
 	}
 	
-	//登录函数
-	function fsign(){
-		var ogetusername=get.byId('username').value.replace(/<[^>]*>|&nbsp;/ig, "");
-		
-		
-		var ogetpassword=get.byId('password').value.replace(/<[^>]*>|&nbsp;/ig, "");
-		var oresult;
-		onim=ogetusername;
-		//分别身上传id为usernmae和passwardd的textarea框里面的内容，用.value.replace(/<[^>]*>|&nbsp;/ig, "")
-		//然后ocover.style.display='none';
-		/*ocover.style.display='none';
-		get.byTagName('span',get.byId('mysay_main')).innerHTML='已签到';
-		EventUtil.addHandler(get.byId('mysay_main'),'click',function () {});*/
-		$.ajax({
-        type:'POST',
-		url:'login.php',
-        
-		data:{
-		   use:ogetusername,
-		   pas:ogetpassword,
-		},
-        
-		success:function(data){
-           oocc(data,ogetusername);
-		   if(data==4)
-		   {
-			   window.location.href="http://localhost/z7/managepaper/management.html";
-
-		   }
-		   else if(data==2)
-		   {
-			   osign=1;
-		   }
-		   else{
-			   osign=0;
-		   }
-
-        }
-		
-		 });
-		
-		
-	}
-		
-		
-	  
-		
-
-		/*if(1){
-			
-		
-			ocover.style.display='none';
-			get.byTagName('span',get.byId('mysay_main')).innerHTML='已签到';
-		    EventUtil.addHandler(get.byId('mysay_main'),'click',function () {});
-			alert('已经登录成功并已签到，你可以查看公告和你一周的签到情况，或者在留言栏留下你想说的话。');
-			
-			
-		}
-		else{
-			alert('未登录成功，请重新登录');
-			get.byTagName("form", get.byId('cover_main'))[0].reset();
-		}
-		*/
-
-   
-			
+	showinf();
+	showqiandao();
 	
-	var oreg_day_li=document.getElementById('reg_day').getElementsByTagName('li');
-	var oyizhou_sign;
-	 
-	function oocc(data,ogetusername){
-		if(data==2){
-			alert('已经登录成功并已签到，你可以查看公告和你一周的签到情况，或者在留言栏留下你想说的话。');
-			get.byId('username').value='';
-			get.byId('password').value='';
-			get.byTagName('span',get.byId('mysay_main'))[0].innerHTML='已签到';
-		    get.byId('mysay_main').onclick=null;
-			get.byId('mysay_main').onmouseover=null;
-			ocover.style.display='none';
-			var mydata=new Date();
-			var weekday=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-			var mynum=mydata.getDay();
-			
-					   $.ajax({
-					type:'POST',
-					url:'count.php',
-					
-					data:{
-					   usen:ogetusername ,
-					   week:weekday[mynum],
-					},
-					
-					success:function(rsc){
-					    var ous = eval('(' + rsc + ')');
-					    ookk(ous);
-					  
-					}
-					   
-			
-					
-					
-					 });
-		}
-			  /*for(var i=0;i<5;i++)
-			  {
-				  if(oyizhou_sign[i])
-				  {
-					  oreg_day_li[i].className='reg_in';
-				  }
-			  }
-		  
-		}*/
-		else if(data==4)
-		{
-		}
-		else{
-			alert('未登录成功，请重新登录');
-			get.byId('username').value='';
-			get.byId('password').value='';
-		}
-		
-	}
-	
-    function ookk(ous){
-		for(var i=2;i<7;i++)
-			  {
-				  if(ous[i]==2)
-				  {
-					  oreg_day_li[i-2].className='reg_in';
-				  }
-			  }
-	}
-	
-	
-	
-
 	//发送广播函数
-	function fnSend ()
+	function fnSend()
 	{
 		//这个是if分支里面的如果没有登录就无法留言
-		if(!osign)
-		{
-			alert('请先登录再留言');
-			//重置表单
-			get.byTagName("form", omessage)[0].reset();//使表单中的元素重置为默认值
-		}
-		else{
 			var reg = /^\s*$/g;//这里表示 一串任意多个空白符
 			if(reg.test(oconbox.value))
 			{//如果留言框为空
@@ -325,23 +284,20 @@ window.onload=function(){
 				var oDate = new Date();//取得表示当前时间的对象
 				//这里面应该从后台提取用户的名字显示上去
 				//这里面的.replace(/<[^>]*>|&nbsp;/ig,'')是把留言框输入的html标签自动屏蔽掉，包括空格
+				//这个也是怎么把登录成功人的名字传过来,我现在用chen代替
 				oLi.innerHTML = "<div class=\"content\">\
 									<div class=\"username\"><a href=\"#\">" + onim + "</a>:</div>\
-									<div class=\"messinf\">" + oconbox.value.replace(/<[^>]*>|&nbsp;/ig, "") + "</div>\
+									<div class=\"messinf\">" + xssout(oconbox.value) + "</div>\
 									<div class=\"times\"><span>" + format(oDate.getMonth() + 1) + "\u6708" + format(oDate.getDate()) + "\u65e5 " + format(oDate.getHours()) + ":" + format(oDate.getMinutes()) + "</span></div>\
 								 </div>";
 								 
 								 $.ajax({
 						type:'POST',
-						url:'contents.php',
+						url:'message.php',
 						
 						data:{
-						   oni:onim ,
-						   con:oconbox.value ,
-						   mon:oDate.getMonth(),
-						   dat:oDate.getDate(),
-						   hou:oDate.getHours(),
-						   miu:oDate.getMinutes(),
+						   //这里的onim也是一个问题
+						   con:oconbox.value,
 						},
 						
 						success:function(){
@@ -377,18 +333,19 @@ window.onload=function(){
 					}
 				},30);
 			}
-		 }
 	}
-		
-		//格式化时间, 如果为一位数时补0
-		function format(str)
-		{
-			return str.toString().replace(/^(\d)$/,"0$1")
-			//这里是如果传进来的匹配成功的是一个数字的字符串，就用$1捕获(\d)这个数字，并在前面加上0，实现为一位数时补0
-		}
 	
-    
+	
+	//格式化时间, 如果为一位数时补0
+	function format(str)
+	{
+		return str.toString().replace(/^(\d)$/,"0$1")
+		//这里是如果传进来的匹配成功的是一个数字的字符串，就用$1捕获(\d)这个数字，并在前面加上0，实现为一位数时补0
+	}
 
-	
+
+
+
+
+
 }
-	

@@ -1,46 +1,36 @@
 <?php
-   include("conn.php");
-   include("checkcount.php");
+   include("../userpaper/conn.php");
    mysql_query('set names utf8');
-   session_start();
-    $username=$_SESSION['loginuser'];
-	//$username="leozhang";
-	check($username);
-   /*$sql="select * from `members` where `name`='$usen';";
-   
-   $query=mysql_query($sql);
-   $rsc=mysql_fetch_array($query);
-      
-   echo json_encode($rsc);以前的代码 传给他一周七天的值*/
-   $sql="select `checkout_date` from `sign` where `username`='$username' order by `id` DESC limit 1";//判断今天是周几，是一周的第几天
-   $a=mysql_query($sql);
-   $b=mysql_fetch_array($a);
-	//print_r ($b);
-	//echo $b[0];
-	$c=strtotime($b[0]);
-	
-	//echo $c;
-	$time= date("D",$c);
+
+   $n=$_POST['omyi'];
+/*$n=2;*/
+   $today=date("D",time());
 	//echo $time;
 	$arrdate=array("Mon","Tue","Wed","Thu","Fri","Sat","Sun");
 	  for($temp = 0;$temp < count($arrdate);$temp++){
-    if($arrdate[$temp]==$time){
+    if($arrdate[$temp]==$today){
 	$i=$temp+1;
 	break;
 	}
   }
   //echo $i;
-  $sum=$i;
      $ipotime=time()-24*3600*($i-1);
 	 $ipotimed=date("Y-m-d",$ipotime);
-	 $sql="SELECT `checkout_date`  FROM `sign` WHERE `checkout_date` > '$ipotimed' and `checkout_date` <= 'time()' and `username`='$username';";
+	// echo $ipotimed;
+	 $sql="SELECT `username`  FROM `member` WHERE  `member_id`='$n';";
+	 $a=mysql_query($sql);
+	 $b=mysql_fetch_assoc($a);
+	 $name= $b['username'];
+	// echo $name;
+	 $sql="SELECT `checkout_date`  FROM `sign` WHERE `checkout_date` > '$ipotimed' and `checkout_date` <= 'time()' and `username`='$name';";
 	 $a=mysql_query($sql);
 	 $array=null;
 	 while($b=mysql_fetch_assoc($a))
 	 {
-	 
 		$array[]=$b;
+		
 	 }
+	 if($array){
 //print_r($array);
 	foreach($array as &$v){
 	$v=date("D",strtotime($v['checkout_date']));
@@ -61,6 +51,13 @@ $qwe=array(2,2,2,2,2,2,2,);
 		case "Sun":$qwe[6]=1;break;
 		}
 	}
+	}else{
+	$qwe=array(2,2,2,2,2,2,2,);
+	}
+	$qwe[]=$name;
   //传给前台一数组
+  if($name==null){
+  }else{
 echo json_encode($qwe);
+}
 ?>

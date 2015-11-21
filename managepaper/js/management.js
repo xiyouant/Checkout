@@ -1,4 +1,34 @@
 // JavaScript Document
+
+function del_ff(elem){
+
+	var elem_child = elem.childNodes;
+	
+	for(var i=0; i<elem_child.length;i++){
+	
+		if(elem_child[i].nodeName == "#text" && !/\s/.test(elem_child.nodeValue))
+		
+		{
+					elem.removeChild(elem_child)
+		
+		}
+		
+	}
+
+}
+
+
+function xssout (val) {
+    val = val.toString();
+    val = val.replace(/[<]/g, "&lt;");
+    val = val.replace(/[>]/g, "&gt;");
+    val = val.replace(/"/g, "&quot;");
+    val = val.replace(/'/g, "&#39;");
+    return val;
+};
+
+
+
 /*--------------------
      获取id,class,TagName
 ----------------------*/
@@ -40,19 +70,81 @@ window.onload=function(){
 	var atable=document.getElementById('css_table');	
 	var atr=document.getElementById('css_table').getElementsByClassName('css_tr');
 	var oann_btn=get.byId('ann_btn');
-	var odel_btn=get.byId('del_btn');
-	var oadd_btn=get.byId('add_btn');
+	var ojump_btn=get.byId('jump_btn');
+	var opeonum;
     for(var i=0;i<header_li.length;i++)
 	{
 		EventUtil.addHandler(header_li[i],'mouseover',function(){this.style.backgroundColor='#5D98C8';})
 		EventUtil.addHandler(header_li[i],'mouseout',function(){this.style.backgroundColor='#1F2727';})
 	}
 	EventUtil.addHandler(oann_btn,'click',fann);
-	EventUtil.addHandler(odel_btn,'click',fdel);
-	EventUtil.addHandler(oadd_btn,'click',fadd);
+    EventUtil.addHandler(oann_btn,'mouseover',function(){this.style.backgroundColor='#1F2727';this.style.color='#f0f0f0';});
+	EventUtil.addHandler(oann_btn,'mouseout',function(){this.style.backgroundColor='#f0f0f0';this.style.color='#666';});
+	EventUtil.addHandler(ojump_btn,'click',fjump);
+	EventUtil.addHandler(get.byId('manage_out'),'click',manageout);
+	
+	
+	$.ajax({
+		   
+		type:'POST',
+		url:'lastweek.php',
+		
+		success:function(rss){
+			var now_week = eval('(' + rss + ')');
+			get.byClass('jump_week_text')[0].value=now_week;
+			}
+		 });
+
+	
+	
+
+		$.ajax({
+		   
+		type:'POST',
+		url:'sum.php',
+		
+		success:function(rss){
+			var osum = eval('(' + rss + ')');
+			opeonum=parseInt(osum.member_id);
+			oodd(opeonum);
+			}
+		 });
+    //安全退出
+	function manageout(){
+		$.ajax({
+		   
+		type:'POST',
+		url:'logout.php',
+		
+		success:function(rss){
+			window.location.href="../index.php";
+		}
+		 });
+	}
+	
+	
+	
+	
+    /*这个是提交跳转的几周的函数*/
+    function fjump(){
+		$.ajax({
+		   
+		type:'POST',
+		url:'sum.php',
+		
+		success:function(rss){
+			var osum = eval('(' + rss + ')');
+			opeonum=parseInt(osum.member_id);
+			soodd(opeonum);
+			}
+		 });
+    }
+
+
+
     function fann(){
-		alert('已提交此公告')
-		var ann_main=get.byId('conbox').value;
+		alert('已提交此公告');
+		var ann_main=xssout(get.byId('conbox').value);
 		$.ajax({
         type:'POST',
 		url:'notice.php',
@@ -62,8 +154,7 @@ window.onload=function(){
 		},
         
 		success:function(){
-       
-
+ 
         }
 		
 		 });
@@ -74,70 +165,16 @@ window.onload=function(){
 	
 	
 	
-	function fdel(){
-			
-		   $.ajax({
-		type:'POST',
-		url:'del.php',
-		data:{
-			omydel:get.byId('del_peo').value,
-		},
-		success:function(){
-			
-		}
-         });
-		 alert('该成员已删除');
-		 get.byId('del_peo').value='';
-		   
+	function oodd(peopel_num){
 		
-	}
-	function fadd(){
-		
-		$.ajax({
-		type:'POST',
-		url:'add.php',
-		data:{
-			omyadd:get.byId('add_peo').value,
-		},
-		success:function(){
-			
-		}
-         });
-		 alert('该成员已添加');
-		 get.byId('add_peo').value='';
-	}
-	
-	
-	var opeonum;
-	
-
-	   $.ajax({
-	type:'POST',
-	url:'sum.php',
-	
-	success:function(rss){
-		var osum = eval('(' + rss + ')');
-		opeonum=osum[0];
-		oodd(opeonum);
-	  
-	}
-	   
-
-	
-	
-	 });
-	
-	
-	function oodd(opeonum){
-				for(var i=1;i<opeonum+1;i++)
+				for(var i=1;i<peopel_num+1;i++)
 				{	   
 				      
 						
 						
-						
-											$.ajax({
+					$.ajax({
 						type:'POST',
-						url:'sign.php',
+						url:'signnow.php',
 						
 						data:{
 							omyi:i,
@@ -159,42 +196,90 @@ window.onload=function(){
 	
 	
 	
+	
+	function soodd(peopel_num){
+		        atable.innerHTML="<div class=\"css_tr\">\
+								  <div class=\"css_td\">" + "姓名" + "</div>\
+								  <div class=\"css_td\">" + "周一" + "</div>\
+								  <div class=\"css_td\">" + "周二" + "</div>\
+								  <div class=\"css_td\">" + "周三" + "</div>\
+								  <div class=\"css_td\">" + "周四" + "</div>\
+								  <div class=\"css_td\">" + "周五" + "</div>\
+								  <div class=\"css_td\">" + "周六" + "</div>\
+								  <div class=\"css_td\">" + "周日" + "</div>\
+								  <div class=\"css_td\">" + "一周签到情况" + "</div></div>"
+				for(var i=1;i<peopel_num+1;i++)
+				{	   
+				      
+						
+						
+					$.ajax({
+						type:'POST',
+						url:'sign.php',
+						
+						data:{
+							omyi:i,
+							week_num:get.byClass('jump_week_text')[0].value,
+						},
+						success:function(rsi){
+					
+							var oin = eval('(' + rsi + ')');
+							oopp(oin);
+						  
+						}
+						
+						
+						});
+						
+						
+						
+				
+				}
+	}
+	
+	
+	
 	function oopp(oin){
-		    if(oin[0]!==undefined)
+		    if(oin[7]!==undefined)
 			{
 		        var osign_week=0;
 				var opeoarray_two=[];
-				for(var j=2;j<7;j++)
+				for(var j=0;j<7;j++)
 						{
 							
-							if(oin[j]==2)
+							if(oin[j]==1)
 							{
 								
-								opeoarray_two[j-2]='已签到';
+								opeoarray_two[j]='已签到';
 								osign_week++;
 								
 							}
 							else{
 								
-								opeoarray_two[j-2]='未签到';
+								opeoarray_two[j]='未签到';
 							
 							}
 						}
 						var odiv = document.createElement("div");//创建一个li节点
 							odiv.className='css_tr';
-								
-								odiv.innerHTML = "<div class=\"css_td\">" + oin[0] + "</div>\
+								odiv.innerHTML = '';
+								odiv.innerHTML = "<div class=\"css_td\">" + oin[7] + "</div>\
 												  <div class=\"css_td\">" + opeoarray_two[0] + "</div>\
 												  <div class=\"css_td\">" + opeoarray_two[1] + "</div>\
 												  <div class=\"css_td\">" + opeoarray_two[2] + "</div>\
 												  <div class=\"css_td\">" + opeoarray_two[3] + "</div>\
 												  <div class=\"css_td\">" + opeoarray_two[4] + "</div>\
+												  <div class=\"css_td\">" + opeoarray_two[5] + "</div>\
+												  <div class=\"css_td\">" + opeoarray_two[6] + "</div>\
 												  <div class=\"css_td\">" + osign_week + "</div>";
-								
 								
 						atable.appendChild(odiv);
 			}
 	}
 	
+
+
+	
+		
 	
 }

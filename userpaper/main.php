@@ -1,15 +1,19 @@
+<?php
+include("session.php");
+checklogin();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link type="text/css" rel="stylesheet" href="css/home.css" />
+<link type="text/css" rel="stylesheet" href="css/main.css" />
 <script src="../jquery-2.0.0.min.js"></script>
-<script src="js/home.js"></script>
-<link type="text/css" href="css/cover.css" rel="stylesheet" />
-<title>签到</title>
+<script src="js/main.js"></script>
+<title>主界面</title>
 </head>
 
 <body>
+<div id="safe_out">安全退出</div>
 <div id='main'>
    <div class='line_a'></div>
    <div id='announce'>
@@ -40,25 +44,10 @@
           <li><span>Wed</span></li>
           <li><span>Thu</span></li>
           <li><span>Fri</span></li>
+          <li><span>Sat</span></li>
+          <li><span>Sun</span></li>
        </ul>
    </div>
-   <div id='mysay'>
-       <div id='mysay_main'><span>点我签到</span></div>
-   </div>
-</div>
-<div id='cover'>
-  <img id='cover_img' src='img/coverbg.png' />
-  <div id='cover_header'>
-      <span>xiyouant</span>
-      <div id='cover_line_a'></div>
-      <img id='cover_header_img' src='img/xoyouant.png' />
-  </div>
-  <div id='cover_main'>
-        <input id='username' type='text' placeholder='Username' />
-        <input id='password' type="password" placeholder='Password'/>
-        <input id='cover_sign' type="button" value='登录' />
-        <input id='cover_out' type='button' value='退出' />
-  </div>
 </div>
 </body>
 </html>
