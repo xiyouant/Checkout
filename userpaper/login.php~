@@ -2,9 +2,9 @@
 
  include("conn.php");
  mysql_query('set names utf8');
-$id= mysql_escape_string($_POST['use']);
+$id=$_POST['use'];
 
-$password= mysql_escape_string($_POST['pas']);
+$password=$_POST['pas'];
 
 $sql = "SELECT * FROM `member` WHERE `username` = '$id';";
 $query=mysql_query($sql);

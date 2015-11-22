@@ -19,7 +19,7 @@ check();
   <img class='cover_img'  src="userpaper/img/coverbg.png"/>
   <input id='manage_sign' type="button" value='管理员登录' />
   <div class='cover_header'>
-      <span>xiyouant</span>
+      <span>xiyounet</span>
       <div class='cover_line_a'></div>
   </div>
   <div id='cover_main'>
