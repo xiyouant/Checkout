@@ -8,7 +8,7 @@ session_start();
 }
 function checklogin(){
 session_start();
-	if(($_SESSION['loginuser'])=='leozhang'){
+	if(($_SESSION['loginuser'])=='root'){
 	}else{
 		header("location:../index.php");
 	}
