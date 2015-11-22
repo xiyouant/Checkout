@@ -21,7 +21,6 @@ check();
   <div class='cover_header'>
       <span>xiyouant</span>
       <div class='cover_line_a'></div>
-      <img class='cover_header_img' src='userpaper/img/xoyouant.png' />
   </div>
   <div id='cover_main'>
         <input id='username' type='text' placeholder='Username' />
