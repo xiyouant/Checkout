@@ -30,7 +30,7 @@
 							}else{
 				$qwe=array(2,2,2,2,2,2,2,);
 				}
-				$qwe[]=$name;
+				$qwe[]=$c;
 			  //传给前台一数组
 						  if($name==null){
 						  }else{

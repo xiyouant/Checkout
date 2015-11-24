@@ -6,7 +6,7 @@ $password=$_POST['pas'];
  $sql = "SELECT * FROM `member` WHERE `username` = '$admin';";
 $query=mysql_query($sql);
 $rs=mysql_fetch_array($query);
-if($admin=="leozhang"){
+if($admin=="root"){
 	if($rs['password']==$password){
 	$data=1;
 	session_start();

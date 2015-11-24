@@ -66,7 +66,15 @@ function css(obj, attr, value)
 window.onload=function(){
 	var obtn=get.byId("btn");
 	EventUtil.addHandler(obtn,"click",fsign);
-
+    document.getElementsByTagName("body")[0].onkeydown=clickButton;
+	/*回车*/
+    function clickButton(){
+	
+	if ( window.event.keyCode == 13 )
+    {
+        document.getElementById('btn').click();
+    }
+}
 
 	function fsign(){
 		var ogetusername=get.byId('username').value;
@@ -112,4 +120,16 @@ window.onload=function(){
 				   get.byId('password').value="";
 			   }
 	}
+}
+
+
+
+
+
+function clickButton(){
+	
+	if ( event.keyCode == 13 )
+    {
+        document.getElementById('btn').click();
+    }
 }

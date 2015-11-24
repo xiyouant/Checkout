@@ -17,10 +17,11 @@
      $ipotime=time()-24*3600*($i-1);
 	 $ipotimed=date("Y-m-d",$ipotime);
 	// echo $ipotimed;
-	 $sql="SELECT `username`  FROM `member` WHERE  `member_id`='$n';";
+	 $sql="SELECT *  FROM `member` WHERE  `member_id`='$n';";
 	 $a=mysql_query($sql);
 	 $b=mysql_fetch_assoc($a);
 	 $name= $b['username'];
+	  $c=$b['firstname'].$b['lastname'];
 	// echo $name;
 	 $sql="SELECT `checkout_date`  FROM `sign` WHERE `checkout_date` > '$ipotimed' and `checkout_date` <= 'time()' and `username`='$name';";
 	 $a=mysql_query($sql);
@@ -54,7 +55,7 @@ $qwe=array(2,2,2,2,2,2,2,);
 	}else{
 	$qwe=array(2,2,2,2,2,2,2,);
 	}
-	$qwe[]=$name;
+	$qwe[]=$c;
   //传给前台一数组
   if($name==null){
   }else{

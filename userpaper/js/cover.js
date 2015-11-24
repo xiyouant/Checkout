@@ -1,5 +1,9 @@
 // JavaScript Document
-			
+	
+
+
+
+
 function xssout (val) {
     val = val.toString();
     val = val.replace(/[<]/g, "&lt;");
@@ -76,6 +80,15 @@ window.onload=function(){
 	EventUtil.addHandler(get.byId('manage_sign'),'mouseover',function(){this.style.backgroundColor='#0B224C'});
 	EventUtil.addHandler(get.byId('manage_sign'),'mouseout',function(){this.style.backgroundColor='rgba(68,103,157,0.5)'});
 	EventUtil.addHandler(get.byId('manage_sign'),'click',function(){ window.location.href="userpaper/admin.html"});
+	document.getElementsByTagName("body")[0].onkeydown=clickButton;
+	/*回车*/
+    function clickButton(){
+	
+	if ( window.event.keyCode == 13 )
+    {
+        document.getElementById('cover_sign').click();
+    }
+}
 	/*登录函数*/
 	function fsign(){
 		var ogetusername=xssout(get.byId('username').value);
@@ -124,3 +137,10 @@ window.onload=function(){
 	
 	
 }
+
+
+
+
+
+
+
