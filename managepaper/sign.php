@@ -4,17 +4,18 @@
    mysql_query('set names utf8');
    
    $omyi=$_POST['omyi'];
-
-
    $omyn=$_POST['week_num'];
-
    include_once("firstweek.php");
 	 //echo $i;
-	  $sql="SELECT `username`  FROM `member` WHERE  `member_id`='$omyi';";
+	  $sql="SELECT *  FROM `member` WHERE  `member_id`='$omyi';";
 	 $a=mysql_query($sql);
 	 $b=mysql_fetch_assoc($a);
-	 $name= $b['username'];
-	 //echo $name;
+	 //$name= $b['firstname'].$['lastname'];
+	 //echo $b['firstname'];
+	 //echo $b['lastname'];
+	 $name=$b['username'];
+	 $c=$b['firstname'].$b['lastname'];
+	 //echo $c;
 	 if($omyn==1){
 			$fwtime=($i+1)*24*3600+$firsttime;
 			$a=date("Y-m-d",$fwtime);

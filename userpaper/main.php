@@ -1,7 +1,4 @@
-<?php
-include("session.php");
-checklogin();
-?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,14 +20,14 @@ checklogin();
    
    </div> 
    <div id='say'>
-        <div id='message'><!--后面是留言板部分-->
+           <div id='message'><!--后面是留言板部分-->
                         <div class='list'><!--呈现大家留言的地方-->
                             <ul id='ann_ul'>
                                 
                             </ul>
                         </div>
                         <form class='sentmess'>
-                             <div class='a'><textarea id='conbox' class='f-text'></textarea></div><!--留言输入处-->
+                             <div class='a'><input type="text" id='conbox' class='f-text' /></div><!--留言输入处-->
                              <div class='b'><input type="button" id='sentbut' value='发送留言' /></div><!--发送按钮-->
                         </form>
            </div><!--这部分是留言板-->

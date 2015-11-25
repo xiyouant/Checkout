@@ -91,6 +91,8 @@ window.onload=function(){
 	var li_num=30;
 	var oreg_day_li=get.byId('reg_day').getElementsByTagName('li');
 	var osafe_out=get.byId('safe_out');
+	/*回车*/
+   
 	$.ajax
 		({
 				type:'POST',
@@ -212,23 +214,24 @@ window.onload=function(){
 					    
 						if(num_i=='0')
 						{
-							var oname=ors[num_i].name;
-							var ocontents=ors[num_i].content;
-							
-							
+							var ocontents=ors[num_i];
 						}
 						if(num_i=='1')
 						{
-							var omonth=ors[num_i];
+							var oname=ors[num_i];
 						}
 						if(num_i=='2')
 						{
+							var omonth=ors[num_i];
+						}
+						if(num_i=='3')
+						{
 							var odate=ors[num_i];
-						}if(num_i=='3')
+						}if(num_i=='4')
 						{
 							var ohours=ors[num_i];
 						}
-						if(num_i=='4')
+						if(num_i=='5')
 						{
 							var ominutes=ors[num_i];
 
